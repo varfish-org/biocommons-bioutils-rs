@@ -34,7 +34,7 @@ impl Assembly {
     }
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 pub struct Sequence {
     pub aliases: Vec<String>,
     pub assembly_unit: String,
