@@ -1,6 +1,6 @@
 [package]
 name = "biocommons-bioutils"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2021"
 authors = ["Manuel Holtgrewe <manuel.holtgrewe@bih-charite.de>"]
 description = "(Partial) port of biocommons/bioutils to Rust"

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/varfish-org/biocommons-bioutils-rs/compare/v0.1.4...v0.1.5) (2025-09-22)
+
+
+### Bug Fixes
+
+* make Sequence clone-able ([#13](https://github.com/varfish-org/biocommons-bioutils-rs/issues/13)) ([2da94c5](https://github.com/varfish-org/biocommons-bioutils-rs/commit/2da94c5ebb31f49392244cafc3e3764f2360d071))
+
 ## [0.1.4](https://github.com/bihealth/biocommons-bioutils-rs/compare/v0.1.3...v0.1.4) (2023-10-21)
 
 
