@@ -1,10 +1,10 @@
 //! Static data.
 
-use std::io::Read;
-
 use enum_map::{enum_map, Enum, EnumMap};
 use flate2::read::GzDecoder;
 use serde::Deserialize;
+use std::io::Read;
+use std::str::FromStr;
 
 const GRCH37_JSON_GZ: &[u8] = include_bytes!("_data/GRCh37.json.gz");
 const GRCH37_P10_JSON_GZ: &[u8] = include_bytes!("_data/GRCh37.p10.json.gz");
@@ -31,6 +31,27 @@ impl Assembly {
             .expect("should not happen; invalid gzip in embedded data");
         serde_json::from_str::<AssemblyInfo>(&grch37_json)
             .expect("should not happen; invalid JSON in embedded data")
+    }
+}
+
+impl FromStr for Assembly {
+    type Err = String;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.to_lowercase().replace(".p", "p").as_str() {
+            "grch37" => Ok(Assembly::Grch37),
+            "grch37p10" => Ok(Assembly::Grch37p10),
+            "grch38" => Ok(Assembly::Grch38),
+            _ => Err(format!("Unknown assembly string: {}", s)),
+        }
+    }
+}
+
+impl TryFrom<&str> for Assembly {
+    type Error = String;
+
+    fn try_from(value: &str) -> Result<Self, Self::Error> {
+        Assembly::from_str(value)
     }
 }
 
