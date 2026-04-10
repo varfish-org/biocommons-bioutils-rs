@@ -38,7 +38,8 @@ impl FromStr for Assembly {
     type Err = String;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s.to_lowercase().replace(".p", "p").as_str() {
+        let normalized = s.trim().to_lowercase().replace(".p", "p");
+        match normalized.as_str() {
             "grch37" => Ok(Assembly::Grch37),
             "grch37p10" => Ok(Assembly::Grch37p10),
             "grch38" => Ok(Assembly::Grch38),
@@ -90,6 +91,7 @@ lazy_static::lazy_static! {
 #[cfg(test)]
 mod test {
     use pretty_assertions::assert_eq;
+    use std::str::FromStr;
 
     use crate::assemblies::{Assembly, ASSEMBLY_INFOS};
 
@@ -98,6 +100,22 @@ mod test {
         assert_eq!(ASSEMBLY_INFOS[Assembly::Grch37].sequences.len(), 92);
         assert_eq!(ASSEMBLY_INFOS[Assembly::Grch37p10].sequences.len(), 275);
         assert_eq!(ASSEMBLY_INFOS[Assembly::Grch38].sequences.len(), 455);
+    }
+
+    #[test]
+    fn parse_assembly_from_str() {
+        assert_eq!(Assembly::from_str("GRCh37").unwrap(), Assembly::Grch37);
+        assert_eq!(
+            Assembly::from_str("grch37.p10").unwrap(),
+            Assembly::Grch37p10
+        );
+        assert_eq!(Assembly::from_str("gRcH38").unwrap(), Assembly::Grch38);
+        assert!(Assembly::from_str("hg19").is_err());
+    }
+
+    #[test]
+    fn parse_assembly_try_from_str() {
+        assert_eq!(Assembly::try_from("GRCh38").unwrap(), Assembly::Grch38);
     }
 }
 
