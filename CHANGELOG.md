@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/varfish-org/biocommons-bioutils-rs/compare/v0.1.5...v0.2.0) (2026-04-10)
+
+
+### Features
+
+* add TryFrom/FromStr implementation to Assembly ([#17](https://github.com/varfish-org/biocommons-bioutils-rs/issues/17)) ([2c9c491](https://github.com/varfish-org/biocommons-bioutils-rs/commit/2c9c491971bb357bca2ced59fdd85b51a6918eac))
+
 ## [0.1.5](https://github.com/varfish-org/biocommons-bioutils-rs/compare/v0.1.4...v0.1.5) (2025-09-22)
 
 
